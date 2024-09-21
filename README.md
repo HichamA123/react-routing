@@ -4,7 +4,7 @@
 In chronological order:
 - Initialize project using `vite`.
 - cleanup redundant code & add `nextui` (with `tailwindcss`)
-- Also add `routing` and `global state management` libraries as well as implementation. routing is necessary for switching pages and global state is needed for giving the entire application access to necessary information like `isLoggedIn` (`React Context API` is sufficient for this usecase)
+- Also add `routing` library and setup the `global state management`. Also start a bairbone setup of both `routing` and `global state management`. routing is necessary for switching pages and global state is needed for giving the entire application access to necessary information like `isLoggedIn` (`React Context API` is sufficient for this usecase)
 - Build `home`, `login` and `dashboard` pages (bairbone).
 - Add login logic. Also add the redirect functionality for when being logged in or not (using sessions).
 - Add `framermotion` page transitions (animations)
