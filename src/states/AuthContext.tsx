@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import Cookies from 'js-cookie';
 import users from "../assets/users.json"
-import { hashPassword } from '../utils';
+import { hashPassword, ToastTypes, triggerToast } from '../utils';
 
 // Define types for the context
 type AuthContextType = {
@@ -68,6 +68,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // if you want to go to home page after logout: do the navigate to home page first then clear all usersession data, because else the user will be navigated to login page because the isLoggedIn is being watched in PrivateRoute component
     setUserSession(null);
     Cookies.remove('userSession'); // Remove session cookie
+    triggerToast("succesfully logged out.", ToastTypes.SUCCESS)
   }, [])
 
   return (

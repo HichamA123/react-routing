@@ -1,6 +1,8 @@
 import { useLocation, useOutlet } from "react-router-dom"
 import Menu from "../components/Menu"
 import { AnimatePresence, motion } from "framer-motion"
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const pageVariants = {
   initial: { // Starting state when component enters
@@ -44,6 +46,7 @@ function Root() {
 					</AnimatePresence>
 				</div>
 			</div>
+			<ToastContainer />
 		</>
 	);
 };

@@ -2,14 +2,13 @@ import React, { useCallback, useEffect, useState } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { Input, Button } from "@nextui-org/react"
 import { useAuth } from "../states/AuthContext"
+import { ToastTypes, triggerToast } from "../utils"
 
 function Login() {
   const { login, isLoggedIn } = useAuth()
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-
-  const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -20,22 +19,23 @@ function Login() {
     e.preventDefault();
 
     if (!username || !password) {
-      setError("please fill in username and password.")
+      triggerToast("please fill in username and password.", ToastTypes.ERROR)
       return
     }
 
     try {
       await login(username, password)
       navigate(from)
+      triggerToast("succesfully logged in.", ToastTypes.SUCCESS)
     } catch (error) {
       if (error instanceof Error) {
         // Now you can safely access properties of the Error object
         console.error('Caught an error:', error.message)
-        setError(error.message)
+        triggerToast(error.message, ToastTypes.ERROR)
       } else {
         // Handle the case where the error is not an instance of Error
         console.error('Caught an unknown error:', error)
-        setError("Unknown error occured")
+        triggerToast(`Unknown error occured: ${error}`, ToastTypes.ERROR)
       }
     }
   }, [username, password])
@@ -60,8 +60,6 @@ function Login() {
         </Button>
 
       </form>
-      {/* TODO proper toast message for error */}
-      {error && <p>{error}</p>} 
     </div>
   )
 };

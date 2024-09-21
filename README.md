@@ -13,10 +13,22 @@ In chronological order:
 - Improve the UI
 - Add `unit tests` (snapshot tests as well as static functions tests) using `jest`.
 
-# ES modules (libraries)
+# ES modules (libraries) with some explanations
 - NextUI
 - TailwindCSS
 - framermotion
 - react-router-dom
 - js-cookie (used for easy access to cookies. used for storing sessions)
-- uuid (used for unique users)
+- uuid (used for unique users, temporary used this library)
+- react-toastify
+
+# issues (thoughts and explanations)
+**Redundant sessionToken in UserSession type in AuthContext**
+Removed the property because `userUuid` is enough for knowing `isLoggedIn` as well as which user is logged in. both logic pieces can be achieved from 1 property.
+
+**No exit animation on pages**
+Solved the issue by reading [framer docs](https://www.framer.com/motion/animate-presence/#usage) The hint that helped me: `Note: Direct children must each have a unique key prop so AnimatePresence can track their presence in the tree.`. This made me think that the pages get wrapped by the `<Outlet />`. So I came along this post: [stackoverflow post](https://stackoverflow.com/questions/75121981/react-framer-motion-animatepresence-exit-animation-does-not-work)
+
+*Solution*
+using `useOutlet()` instead of `<Outlet />` because `<Outlet />` wraps the pages around with a wrapper element. Because of this wrapper element I cannot reach the direct child element to set a key which is required for the animatepresence.
+
