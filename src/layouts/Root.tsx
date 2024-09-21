@@ -22,6 +22,8 @@ const pageVariants = {
 
 function Root() {
 	const location = useLocation()
+
+	// using outlet instead of <outlet /> because it wraps the pages around a component. because of this i cannot reach the child page to set a key for the animatepresence
 	const outlet = useOutlet() // Use useOutlet to capture the children (routed components)
 
 	return (
