@@ -11,3 +11,11 @@ In chronological order:
 - check if `A11y` is sufficiently setup.
 - Improve the UI
 - Add `unit tests` (snapshot tests as well as static functions tests) using `jest`.
+
+# ES modules (libraries)
+- NextUI
+- TailwindCSS
+- framermotion
+- react-router-dom
+- js-cookie (used for easy access to cookies. used for storing sessions)
+- uuid (used for unique users)
