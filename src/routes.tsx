@@ -2,18 +2,27 @@ import {
   createBrowserRouter,
 	Navigate
 } from "react-router-dom";
-import Sample from "./components/Sample"
-import App from "./App";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
 // Creating the router with paths and element mappings
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
 	{
-		path: "/sample",
-		element: <Sample />,
+		path: "/",
+		element: <Home />,
+	},
+	{
+		path: "/home",
+		element: <Home />,
+	},
+	{
+		path: "/login",
+		element: <Login />,
+	},
+	{
+		path: "/dashboard",
+		element: <Dashboard />,
 	},
 	{
 		path: "*",
