@@ -5,6 +5,7 @@ import {
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
 import Root from "./layouts/Root";
 
 // Creating the router with paths and element mappings
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/dashboard",
-				element: <Dashboard />,
+				element: <PrivateRoute><Dashboard /></PrivateRoute>,
 			},
 		]
 	},
