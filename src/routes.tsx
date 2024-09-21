@@ -5,24 +5,31 @@ import {
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Root from "./layouts/Root";
 
 // Creating the router with paths and element mappings
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <Home />,
-	},
-	{
-		path: "/home",
-		element: <Home />,
-	},
-	{
-		path: "/login",
-		element: <Login />,
-	},
-	{
-		path: "/dashboard",
-		element: <Dashboard />,
+		element: <Root />,
+		children: [
+			{
+				path: "/",
+				element: <Home />,
+			},
+			{
+				path: "/home",
+				element: <Home />,
+			},
+			{
+				path: "/login",
+				element: <Login />,
+			},
+			{
+				path: "/dashboard",
+				element: <Dashboard />,
+			},
+		]
 	},
 	{
 		path: "*",
