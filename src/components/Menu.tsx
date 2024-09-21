@@ -1,9 +1,11 @@
 import { useCallback, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link as NextUILink } from "@nextui-org/react";
+import { useAuth } from "../states/AuthContext";
 
 function Menu() {
 
+	const { isLoggedIn, logout } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,9 +27,10 @@ function Menu() {
     return paths.some(value => value === location.pathname)
   }, [location.pathname])
 
-  const handleLogin = useCallback(() => {
-		navigate('/login')
-  }, [])
+	const handleLogin = useCallback(() => {
+    if (isLoggedIn) logout() // autmatically navigates to /login
+    else navigate('/login')
+  }, [isLoggedIn])
 
   return (
 
@@ -48,16 +51,19 @@ function Menu() {
       ]
     }}>
 
+			{/* visible on mobile devices */}
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
       </NavbarContent>
 
+			{/* also visible on mobile devices */}
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
           <p className="font-bold text-inherit">UNC INC</p>
         </NavbarBrand>
       </NavbarContent>
 
+			{/* for sm and larger */}
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarBrand>
           <p className="font-bold text-inherit">UNC INC</p>
@@ -73,13 +79,15 @@ function Menu() {
 
         )}
       </NavbarContent>
-
+			
+			{/* always visible */}
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button onPress={handleLogin} color="primary" variant="flat">{"Login"}</Button>
+          <Button onPress={handleLogin} color="primary" variant="flat">{isLoggedIn? "Log out": "Login"}</Button>
         </NavbarItem>
       </NavbarContent>
 
+			{/* the mobile menu */}
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`} isActive={isCurrentPath(item.paths)}>
