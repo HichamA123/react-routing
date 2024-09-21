@@ -17,6 +17,12 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
     }
   }, [isLoggedIn])
 
+  /*
+    could solve the renavigate with new location issue here,
+    by returning null here if the location.pathname === '/login' but that would be bound to where it would get redirected to initially
+    this way the <Navigate /> component would not get rerendered and trigger a navigation again
+  */
+
   return isLoggedIn ? (<>{children}</>) : (null)
 }
 

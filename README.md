@@ -32,3 +32,11 @@ Solved the issue by reading [framer docs](https://www.framer.com/motion/animate-
 *Solution*
 using `useOutlet()` instead of `<Outlet />` because `<Outlet />` wraps the pages around with a wrapper element. Because of this wrapper element I cannot reach the direct child element to set a key which is required for the animatepresence.
 
+**Navigate rerender in `PrivateRoute.tsx`**
+Whenever the `<Navigate />` gets called, the location gets updated (logically). This updates the `const location` inside the `PrivateRoute.tsx` because it is a react hook. This triggers a rerender. Because this rerender the Navigate gets called again but this time with the new location from the previous navigate call, which is `/login`. Now the `Login.tsx` thinks that the initial route was `/login` which is incorrect.
+
+*Solution*
+See solution with `useEffect` in the `PrivateRoute.tsx` file. This way navigate gets called only once, not depending on any `const location` changes, just the `isLoggedIn` state prop.
+
+
+
