@@ -51,7 +51,7 @@ function Login() {
   return (
     <div className="flex flex-col justify-center items-center gap-4" style={{ height: '85vh' }} aria-live="polite" >
       <h1 className="text-5xl font-semibold" >Login</h1>
-      <form onSubmit={handleLogin} className="flex flex-col items-center gap-4 bg-white w-4/5 p-4 border-neutral-300 border-2 rounded-2xl">
+      <form onSubmit={handleLogin} className="flex flex-col items-center gap-4 bg-white w-4/5 md:w-3/5 lg:w-2/5 p-4 border-neutral-300 border-2 rounded-2xl">
         <Input variant="bordered" isRequired type="text" label="Username" aria-label="username" value={username} onChange={(e) => setUsername(e.target.value)} />
         <Input variant="bordered" isRequired type="password" label="Password" aria-label="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
