@@ -38,5 +38,11 @@ Whenever the `<Navigate />` gets called, the location gets updated (logically). 
 *Solution*
 See solution with `useEffect` in the `PrivateRoute.tsx` file. This way navigate gets called only once, not depending on any `const location` changes, just the `isLoggedIn` state prop.
 
+# `A11y` checklist
+- using semantic HTML: `<button>` instead of `div`, `<h1>` as the first top header and not `h2 or h3`. menubar wrapped in `nav` element. Using semantic HTML should cover accessibility, roles and states as per MDN docs: `Developers should prefer using the correct semantic HTML element over using ARIA`
+- Setup few arria attributes, specifically `aria-label` props in `Menu.tsx` and `Login.tsx`
+- Form accessibility and keyboard navigation is taken care of by `NextUI`. It helps not using custom interactive elements ;)
+- Added page titles
+
 
 

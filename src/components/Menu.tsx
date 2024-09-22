@@ -71,7 +71,7 @@ function Menu() {
 
         {menuItems.map((item, index) => (
           <NavbarItem key={`${item}-${index}`} isActive={isCurrentPath(item.paths)}>
-            <NextUILink as={Link} to={item.paths[0]} color={isCurrentPath(item.paths) ? "primary" : "foreground"}>
+            <NextUILink as={Link} to={item.paths[0]} color={isCurrentPath(item.paths) ? "primary" : "foreground"} aria-label={`Navigate to ${item.name}`}>
               {item.name}
             </NextUILink>
           </NavbarItem>
@@ -83,7 +83,7 @@ function Menu() {
 			{/* always visible */}
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button onPress={handleLogin} color="primary" variant="flat">{isLoggedIn? "Log out": "Login"}</Button>
+          <Button onPress={handleLogin} color="primary" variant="flat" aria-label={isLoggedIn ? 'Logout from the application' : 'Login to the application'}>{isLoggedIn? "Log out": "Login"}</Button>
         </NavbarItem>
       </NavbarContent>
 
@@ -91,7 +91,7 @@ function Menu() {
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`} isActive={isCurrentPath(item.paths)}>
-            <NextUILink as={Link} to={item.paths[0]} className="w-full" color={isCurrentPath(item.paths) ? "primary" : "foreground"} size="lg" onPress={() => setIsMenuOpen(false)} >
+            <NextUILink as={Link} to={item.paths[0]} className="w-full" color={isCurrentPath(item.paths) ? "primary" : "foreground"} size="lg" onPress={() => setIsMenuOpen(false)} aria-label={`Navigate to ${item.name}`}>
               {item.name}
             </NextUILink>
           </NavbarMenuItem>

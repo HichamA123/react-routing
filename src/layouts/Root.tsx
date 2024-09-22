@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useLocation, useOutlet } from "react-router-dom"
 import Menu from "../components/Menu"
 import { AnimatePresence, motion } from "framer-motion"
@@ -27,6 +28,14 @@ function Root() {
 
 	// using outlet instead of <outlet /> because it wraps the pages around a component. because of this i cannot reach the child page to set a key for the animatepresence
 	const outlet = useOutlet() // Use useOutlet to capture the children (routed components)
+
+
+	useEffect(() => {
+		const page = location.pathname.slice(1) // remove the / in path
+		const capitalizedPage = page.charAt(0).toUpperCase() + page.slice(1)
+
+		document.title = `UNC INC - ${capitalizedPage || 'Home'}`
+	}, [location.pathname]);
 
 	return (
 		<>
