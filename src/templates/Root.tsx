@@ -23,6 +23,7 @@ const pageVariants = {
   },
 };
 
+// this file acts as the App.tsx as we know it
 function Root() {
 	const location = useLocation()
 
@@ -41,7 +42,7 @@ function Root() {
 		<>
 			<Menu />
 			<div className="flex justify-center mt-3">
-				<div className="basis-11/12 bg-green-500">
+				<div className="basis-11/12">
 					<AnimatePresence mode="wait">
 						<motion.div
 							key={location.pathname}

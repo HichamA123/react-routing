@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
-import Root from "./layouts/Root";
+import Root from "./templates/Root";
 
 // Creating the router with paths and element mappings
 const router = createBrowserRouter([

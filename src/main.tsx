@@ -8,7 +8,7 @@ import router from './routes'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <NextUIProvider>
+    <NextUIProvider className="font-sans">
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>

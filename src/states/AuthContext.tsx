@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import Cookies from 'js-cookie';
 import users from "../assets/users.json"
 import { hashPassword, ToastTypes, triggerToast } from '../utils';
@@ -8,6 +8,7 @@ type AuthContextType = {
 	isLoggedIn: boolean;
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
+  username: string | null;
 }
 
 // gets stored in a cookie
@@ -51,7 +52,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if (!success) throw new Error("Invalid password. Please try again.")
 
     //set userSession cookie
-    const userSession: UserSession = {
+    const newUserSession: UserSession = {
       userUuid: user.uuid
     }
 
@@ -59,8 +60,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const date = new Date();
     date.setMinutes(date.getMinutes() + 5); // Add 5 minutes to the current time
 
-    setUserSession(userSession);
-    Cookies.set('userSession', JSON.stringify(userSession), { expires: date }); // Store token in cookie with a 5-minute expiration
+    setUserSession(newUserSession)
+    Cookies.set('userSession', JSON.stringify(newUserSession), { expires: date }) // Store token in cookie with a 5-minute expiration
   }, []) //if users would be dynamically loaded (like from the backend) and stored in a usestore, the dependency array should then have that variable
 
   // Logout function to clear session and remove cookie
@@ -68,11 +69,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // if you want to go to home page after logout: do the navigate to home page first then clear all usersession data, because else the user will be navigated to login page because the isLoggedIn is being watched in PrivateRoute component
     setUserSession(null);
     Cookies.remove('userSession'); // Remove session cookie
-    triggerToast("succesfully logged out.", ToastTypes.SUCCESS)
+    triggerToast("Succesfully logged out.", ToastTypes.SUCCESS)
   }, [])
 
+  // useMemo = cache result 
+  // usecallback = cache function definition
+
+  //gets username if userSession is set
+  const username = useMemo(() => {
+    if(!userSession) return null
+    const user = users.find(user => user.uuid === userSession.userUuid)
+    if (!user) {
+      triggerToast("User not found.", ToastTypes.ERROR)
+      return null
+    }
+
+    return user.username
+
+  }, [userSession])
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, username }}>
       {children}
     </AuthContext.Provider>
   );
