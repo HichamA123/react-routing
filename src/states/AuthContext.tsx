@@ -27,19 +27,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Check if the user is logged in (double negate to make the value a boolean)
   const isLoggedIn = !!userSession?.userUuid;
 
-  // On component mount, fetch session information from cookies
-  useEffect(() => {
-    const userSessionString = Cookies.get('userSession'); // Assuming your session token is stored in a cookie called 'userSession'
-    if (userSessionString) {
-      const userSession = JSON.parse(userSessionString) as UserSession;
-      setUserSession(userSession as UserSession); // Set the session from the cookie
-
-      //TODO could replace the cookie with an extended expiration date to act as refreshing the session whenever the user (re)loads webapp
-    }
-
-    // no userSession means user has never logged in or the cookie got deleted/expired
-  }, []);
-
   // Login function to login and store session in state and cookie
   const login = useCallback(async (username: string, password: string) => {
 
@@ -87,6 +74,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return user.username
 
   }, [userSession])
+
+  // On component mount, fetch session information from cookies
+  useEffect(() => {
+    const userSessionString = Cookies.get('userSession'); // Assuming your session token is stored in a cookie called 'userSession'
+    if (userSessionString) {
+      const typedUserSession = JSON.parse(userSessionString) as UserSession;
+      setUserSession(typedUserSession); // Set the session from the cookie
+
+      //TODO could replace the cookie with an extended expiration date to act as refreshing the session whenever the user (re)loads webapp
+    }
+
+    // no userSession means user has never logged in or the cookie got deleted/expired
+  }, []);
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout, username }}>

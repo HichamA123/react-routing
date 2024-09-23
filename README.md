@@ -24,18 +24,23 @@ In chronological order:
 
 # issues (thoughts and explanations)
 **Redundant sessionToken in UserSession type in AuthContext**
+
 Removed the property because `userUuid` is enough for knowing `isLoggedIn` as well as which user is logged in. both logic pieces can be achieved from 1 property.
 
 **No exit animation on pages**
+
 Solved the issue by reading [framer docs](https://www.framer.com/motion/animate-presence/#usage) The hint that helped me: `Note: Direct children must each have a unique key prop so AnimatePresence can track their presence in the tree.`. This made me think that the pages get wrapped by the `<Outlet />`. So I came along this post: [stackoverflow post](https://stackoverflow.com/questions/75121981/react-framer-motion-animatepresence-exit-animation-does-not-work)
 
 *Solution*
+
 using `useOutlet()` instead of `<Outlet />` because `<Outlet />` wraps the pages around with a wrapper element. Because of this wrapper element I cannot reach the direct child element to set a key which is required for the animatepresence.
 
 **Navigate rerender in `PrivateRoute.tsx`**
+
 Whenever the `<Navigate />` gets called, the location gets updated (logically). This updates the `const location` inside the `PrivateRoute.tsx` because it is a react hook. This triggers a rerender. Because this rerender the Navigate gets called again but this time with the new location from the previous navigate call, which is `/login`. Now the `Login.tsx` thinks that the initial route was `/login` which is incorrect.
 
 *Solution*
+
 See solution with `useEffect` in the `PrivateRoute.tsx` file. This way navigate gets called only once, not depending on any `const location` changes, just the `isLoggedIn` state prop.
 
 # `A11y` checklist

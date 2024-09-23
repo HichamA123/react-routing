@@ -3,24 +3,24 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link as NextUILink } from "@nextui-org/react";
 import { useAuth } from "../states/AuthContext";
 
+const menuItems = [
+  {
+    name: "Home",
+    paths: ["/", "/home"],
+  },
+  {
+    name: "Dashboard",
+    paths: ["/dashboard"],
+  }
+
+]
+
 function Menu() {
 
 	const { isLoggedIn, logout } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const menuItems = [
-    {
-      name: "Home",
-      paths: ["/", "/home"],
-    },
-    {
-      name: "Dashboard",
-      paths: ["/dashboard"],
-    }
-
-  ]
 
 	//checks if current path matches with any path in given array
   const isCurrentPath = useCallback((paths: Array<string>) => {
