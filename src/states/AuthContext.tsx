@@ -67,7 +67,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     if(!userSession) return null
     const user = users.find(user => user.uuid === userSession.userUuid)
     if (!user) {
-      triggerToast("User not found.", ToastTypes.ERROR)
+      // timeout fixes bug of toast when using useMemo or useCallback on init of component. in useEffect toast works fine
+      setTimeout(() => triggerToast("User not found.", ToastTypes.ERROR), 1)
       return null
     }
 
