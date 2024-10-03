@@ -6,6 +6,6 @@ function Home() {
       <h1 className="text-5xl font-semibold">Home</h1>
     </div>
 	)
-};
+}
 
-export default Home;
+export default Home

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from "react"
 import { useLocation, useOutlet } from "react-router-dom"
 import Menu from "../components/Menu"
 import { AnimatePresence, motion } from "framer-motion"
@@ -21,7 +21,7 @@ const pageVariants = {
       duration: 0.1,
     },
   },
-};
+}
 
 // this file acts as the App.tsx as we know it
 function Root() {
@@ -36,7 +36,7 @@ function Root() {
 		const capitalizedPage = page.charAt(0).toUpperCase() + page.slice(1)
 
 		document.title = `UNC INC - ${capitalizedPage || 'Home'}`
-	}, [location.pathname]);
+	}, [location.pathname])
 
 	return (
 		<>
@@ -58,7 +58,7 @@ function Root() {
 			</div>
 			<ToastContainer />
 		</>
-	);
-};
+	)
+}
 
-export default Root;
+export default Root

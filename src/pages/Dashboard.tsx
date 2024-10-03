@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { useAuth } from "../states/AuthContext";
+import { useMemo } from "react"
+import { useAuth } from "../states/AuthContext"
 
 function Dashboard() {
 
@@ -18,6 +18,6 @@ function Dashboard() {
       <h1 className="text-5xl font-semibold text-center" >{welcomeUser}</h1>
     </div>
   )
-};
+}
 
-export default Dashboard;
+export default Dashboard

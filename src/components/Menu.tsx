@@ -1,7 +1,7 @@
-import { useCallback, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link as NextUILink } from "@nextui-org/react";
-import { useAuth } from "../states/AuthContext";
+import { useCallback, useState } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link as NextUILink } from "@nextui-org/react"
+import { useAuth } from "../states/AuthContext"
 
 const menuItems = [
   {
@@ -20,7 +20,7 @@ function Menu() {
 	const { isLoggedIn, logout } = useAuth()
   const location = useLocation()
   const navigate = useNavigate()
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
 	//checks if current path matches with any path in given array
   const isCurrentPath = useCallback((paths: Array<string>) => {
@@ -100,7 +100,7 @@ function Menu() {
       </NavbarMenu>
 
     </Navbar>
-  );
-};
+  )
+}
 
-export default Menu;
+export default Menu

@@ -13,7 +13,7 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!isLoggedIn) {
       // Navigate to login and pass the original location in state
-      navigate("/login", { state: { from: location }, replace: true });
+      navigate("/login", { state: { from: location }, replace: true })
     }
   }, [isLoggedIn])
 

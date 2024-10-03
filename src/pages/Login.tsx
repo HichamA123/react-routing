@@ -16,7 +16,7 @@ function Login() {
   const from = location.state?.from?.pathname || "/dashboard"
 
   const handleLogin = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!username || !password) {
       triggerToast("please fill in username and password.", ToastTypes.ERROR)
@@ -62,6 +62,6 @@ function Login() {
       </form>
     </div>
   )
-};
+}
 
-export default Login;
+export default Login
